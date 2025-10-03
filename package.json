@@ -1,18 +1,22 @@
 {
-  "name": "react-vite",
-  "private": true,
-  "version": "0.0.0",
+  "name": "oxideplayer",
+  "version": "0.1.0",
+  "description": "OxidePlayer - a small React video player with optional WASM processing",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
   },
+  "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@types/react": "^19.1.10",
@@ -25,5 +29,19 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2"
+  }
+  ,
+  "files": [
+    "dist",
+    "pkg",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "dist/oxideplayer.cjs.js",
+  "module": "dist/oxideplayer.esm.js",
+  "types": "dist/types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourname/oxideplayer"
   }
 }

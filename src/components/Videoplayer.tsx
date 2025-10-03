@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import VideoPlayerControls from "./VideoPlayerControls.js";
 import styles from "./CSS/Videoplayer.module.css";
 
-interface VideoplayerProps {
+export interface VideoplayerProps {
   videoSrc: string;
   style?: React.CSSProperties;
 }
@@ -16,8 +16,10 @@ export default function Videoplayer({ videoSrc }: VideoplayerProps) {
   useEffect(() => {
     (async () => {
       try {
-        const wasm = await import("../pkg/rust_wasm.js");
-        await wasm.default();
+  // Resolve wasm pkg relative to this module so it still works after publishing
+  const wasmUrl = new URL("../pkg/rust_wasm.js", import.meta.url).href;
+  const wasm = await import(/* @vite-ignore */ wasmUrl);
+  await wasm.default();
 
         if (videoRef.current) {
           // @ts-ignore

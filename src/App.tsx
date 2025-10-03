@@ -1,4 +1,4 @@
-import Videoplayer from "./components/Videoplayer";
+import Videoplayer from "./components/Videoplayer.js";
 
 export default function App() {
   return (
