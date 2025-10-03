@@ -1,6 +1,6 @@
 {
   "name": "oxideplayer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "OxidePlayer - a small React video player with optional WASM processing",
   "type": "module",
   "license": "MIT",
@@ -41,7 +41,7 @@
   "types": "dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PaulSpaurgen/video-player" 
+    "url": "https://github.com/PaulSpaurgen/video-player"
   },
-  "homepage": "https://github.com/PaulSpaurgen/video-player" 
+  "homepage": "https://github.com/PaulSpaurgen/video-player"
 }
