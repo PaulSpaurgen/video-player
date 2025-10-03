@@ -1,0 +1,76 @@
+/* CUSTOM CONTROLS BAR */
+.videoControls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  color: white;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* BUTTON STYLES */
+.controlButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.4em;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.controlButton:hover {
+  color: #ddd;
+}
+
+/* PROGRESS BAR */
+.progressBar {
+  flex-grow: 1;
+  height: 6px;
+  background-color: #555;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.progressBar:hover {
+  height: 8px;
+}
+
+.progressFilled {
+  height: 100%;
+  background-color: #ff0000;
+  border-radius: 3px;
+  pointer-events: none;
+  transition: width 0.1s ease-out;
+}
+
+.progressTooltip {
+  position: absolute;
+  bottom: 12px;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* TIME DISPLAY */
+.timeDisplay {
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+

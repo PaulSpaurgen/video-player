@@ -1,0 +1,24 @@
+/* VIDEO CONTAINER (The main wrapper) */
+.videoContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Show controls on hover */
+.videoContainer:hover > div {
+  opacity: 1;
+}
+
+/* VIDEO ELEMENT (Full coverage, no default controls) */
+.videoElement {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  cursor: pointer;
+}
+
