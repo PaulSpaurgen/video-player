@@ -4,6 +4,23 @@
   "description": "OxidePlayer - a small React video player with optional WASM processing",
   "type": "module",
   "license": "MIT",
+  "keywords": [
+    "react",
+    "video-player",
+    "video",
+    "player",
+    "wasm",
+    "webassembly",
+    "rust",
+    "frame-processing",
+    "media-player",
+    "react-component",
+    "typescript",
+    "vite",
+    "video-component",
+    "html5-video",
+    "custom-controls"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc -p tsconfig.build.json",
