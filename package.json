@@ -1,6 +1,6 @@
 {
   "name": "oxideplayer",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "OxidePlayer - a small React video player with optional WASM processing",
   "type": "module",
   "license": "MIT",
