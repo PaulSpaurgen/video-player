@@ -1,3 +1,3 @@
-import Videoplayer from "./components/Videoplayer.js";
-export type { VideoplayerProps } from "./components/Videoplayer.js";
+import Videoplayer from "./components/Videoplayer";
+export type { VideoplayerProps } from "./components/Videoplayer";
 export { Videoplayer as default };

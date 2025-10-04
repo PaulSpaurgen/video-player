@@ -36,9 +36,21 @@
     "README.md",
     "LICENSE"
   ],
-  "main": "dist/oxideplayer.cjs.js",
+  "main": "dist/oxideplayer.cjs",
   "module": "dist/oxideplayer.esm.js",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/oxideplayer.esm.js",
+      "require": "./dist/oxideplayer.cjs",
+      "default": "./dist/oxideplayer.esm.js"
+    },
+    "./style.css": "./dist/oxideplayer.css"
+  },
+  "sideEffects": [
+    "./dist/oxideplayer.css"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/PaulSpaurgen/video-player"

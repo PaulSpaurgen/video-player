@@ -9,7 +9,7 @@ export default defineConfig({
       entry: "src/index.ts",
       name: "OxidePlayer",
       formats: ["es", "cjs"],
-      fileName: (format) => `oxideplayer.${format === "es" ? "esm" : "cjs"}.js`,
+      fileName: (format) => (format === "es" ? "oxideplayer.esm.js" : "oxideplayer.cjs"),
     },
     rollupOptions: {
       external: ["react", "react-dom"],

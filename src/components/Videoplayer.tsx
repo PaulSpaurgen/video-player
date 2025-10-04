@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import VideoPlayerControls from "./VideoPlayerControls.js";
+import VideoPlayerControls from "./VideoPlayerControls";
 import styles from "./CSS/Videoplayer.module.css";
 
 export interface VideoplayerProps {
