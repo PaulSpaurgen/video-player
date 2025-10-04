@@ -5,21 +5,30 @@ import styles from "./CSS/Videoplayer.module.css";
 export interface VideoplayerProps {
   videoSrc: string;
   style?: React.CSSProperties;
+  showProcessingSnackbar?: boolean;
 }
 
-export default function Videoplayer({ videoSrc }: VideoplayerProps) {
+export default function Videoplayer({ videoSrc, showProcessingSnackbar = false }: VideoplayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const processorRef = useRef<any>(null);
   const [framesProcessed, setFramesProcessed] = useState(0);
+  const [showSnackbar, setShowSnackbar] = useState(showProcessingSnackbar);
 
   useEffect(() => {
     (async () => {
       try {
-  // Resolve wasm pkg relative to this module so it still works after publishing
-  const wasmUrl = new URL("../pkg/rust_wasm.js", import.meta.url).href;
-  const wasm = await import(/* @vite-ignore */ wasmUrl);
-  await wasm.default();
+        // Resolve wasm pkg relative to this module
+        // In dev: src/components/Videoplayer.tsx -> src/pkg/ (../pkg)
+        // In production: dist/oxideplayer.esm.js -> dist/pkg/ (./pkg)
+        const isDev = import.meta.url.includes('/src/components/');
+        const wasmJsUrl = isDev 
+          ? new URL("../pkg/rust_wasm.js", import.meta.url).href
+          : new URL("./pkg/rust_wasm.js", import.meta.url).href;
+        
+        const wasm = await import(/* @vite-ignore */ wasmJsUrl);
+        // Let rust_wasm.js resolve the .wasm file itself using its own import.meta.url
+        await wasm.default();
 
         if (videoRef.current) {
           // @ts-ignore
@@ -140,14 +149,43 @@ export default function Videoplayer({ videoSrc }: VideoplayerProps) {
 
   return (
     <div ref={containerRef} className={styles.videoContainer}>
+      
       <video
         id="video-element"
         ref={videoRef}
         src={videoSrc}
         preload="metadata"
-        className={styles.videoElement}
+        className={`${styles.videoElement} ${styles}`}
       />
       <VideoPlayerControls videoRef={videoRef} containerRef={containerRef} />
+      
+      {/* Frames Processed Snackbar */}
+      {showSnackbar && (
+        <div className={styles.snackbar}>
+          <div className={styles.snackbarContent}>
+            <div className={styles.snackbarIcon}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <div className={styles.snackbarText}>
+              <span className={styles.snackbarLabel}>WASM Processing</span>
+              <span className={styles.snackbarFrames}>{framesProcessed.toLocaleString()} frames</span>
+            </div>
+          </div>
+          <button 
+            className={styles.snackbarClose}
+            onClick={() => setShowSnackbar(false)}
+            aria-label="Close"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

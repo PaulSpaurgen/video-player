@@ -5,7 +5,7 @@ export default function App() {
     <div style={{display: "flex",  flexDirection: "column", justifyContent: "center", alignItems: "center", height: "100vh", width: "100vw"}}>
      <h1>OxidePlayer</h1>
      <div style={{width: "600px", height: "100%", display: "flex", justifyContent: "center", alignItems: "center"}}>
-          <Videoplayer videoSrc="/testVideo.mp4" />
+          <Videoplayer videoSrc="/testVideo.mp4" showProcessingSnackbar={true} />
      </div>
     
     </div>
