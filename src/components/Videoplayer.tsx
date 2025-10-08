@@ -26,9 +26,14 @@ export default function Videoplayer({ videoSrc, showProcessingSnackbar = false }
           ? new URL("../pkg/rust_wasm.js", import.meta.url).href
           : new URL("./pkg/rust_wasm.js", import.meta.url).href;
         
+        // IMPORTANT: Also resolve the .wasm file URL
+        const wasmBinaryUrl = isDev
+          ? new URL("../pkg/rust_wasm_bg.wasm", import.meta.url).href
+          : new URL("./pkg/rust_wasm_bg.wasm", import.meta.url).href;
+        
         const wasm = await import(/* @vite-ignore */ wasmJsUrl);
-        // Let rust_wasm.js resolve the .wasm file itself using its own import.meta.url
-        await wasm.default();
+        // Pass the WASM binary URL, not the JS URL!
+        await wasm.default(wasmBinaryUrl);
 
         if (videoRef.current) {
           // @ts-ignore
